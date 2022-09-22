@@ -20,6 +20,7 @@
                             <th scope="col">Id</th>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Phone</th>
                         </tr>
                         </thead>
                         
@@ -34,6 +35,7 @@
                                     </a>
                                 </td>
                                 <td>{{ $user->email }}</td>
+                                <td>{{ $user->userDetails->phone }}</td>
                                 <td>
                                     <a href="{{ route('admin.users.show', $user->id) }}" class="btn btn-success">User info</a>
 
