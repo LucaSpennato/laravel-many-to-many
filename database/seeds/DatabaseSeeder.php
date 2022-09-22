@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             UsersDetailsTableSeeder::class,
             PostSeeder::class,
+            // ? in quanto many to many, può andare ovunque
+            TagTableSeeder::class,
         ]);
     }
 }
