@@ -8,16 +8,6 @@
     @enderror
 </div>
 
-{{-- <div class="mb-3">
-    <label for="author" class="form-label">Author</label>
-    <input name="author" type="text" class="form-control @error('author') is-invalid @enderror" id="author"
-    value="{{ old('author',$post->author ?? '') }}">
-    <div class="form-text">Insert post's author</div>
-    @error('author')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
-</div> --}}
-
 <div class="mb-3">
     <label for="post_image" class="form-label">Image</label>
     <input name="post_image" type="text" class="form-control @error('post_image') is-invalid @enderror" id="post_image"
@@ -26,6 +16,16 @@
     @error('post_image')
         <div class="alert alert-danger">{{ $message }}</div>
     @enderror
+</div>
+
+<div class="mb-3">
+    <label class="form-check-label" for="tags">Tags</label>
+    @foreach ($tags as $tag)
+    <div class="form-check form-switch">
+        <input name="tags[]" class="form-check-input" value="{{ old('tag->id', $tag->id ) }}" type="checkbox" role="switch" id="tags">
+        <label class="form-check-label" for="tags">{{ old('tag->name', $tag->name ) }}</label>
+    </div>
+    @endforeach
 </div>
 
 <div class="mb-3">

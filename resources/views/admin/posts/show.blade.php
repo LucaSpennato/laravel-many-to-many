@@ -23,9 +23,7 @@
                                 Tags: 
                             </div>
                             @forelse ($post->tags as $tag)
-
-                                {{ $tag->name }}
-
+                                {{ $tag->name }} |
                             @empty
                                 No tags
                             @endforelse
