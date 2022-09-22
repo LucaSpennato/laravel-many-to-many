@@ -167,12 +167,10 @@ class PostController extends Controller
         $upPost->update($upData);
         // ? sync anche qua dei tags! 
         // ! vedi anche in store!
-        if(isset($upData['tags'])){
-            $upPost->tags()->sync($upData['tags']);
-        }else{
+        if(!isset($upData['tags'])){
             $upData['tags'] = null;
-            $upPost->tags()->sync($upData['tags']);
         }
+        $upPost->tags()->sync($upData['tags']);
 
         return redirect()->route('admin.posts.show', $upData['slug'])->with('session-change', $upData['title'] . ' ' . 'è stata modificata con successo!')
         ->with(['class' => 'alert-warning']);
