@@ -16,9 +16,24 @@
                 <div class="card m-auto mt-5 p-1" style="width: 18rem;">
                     <img src="{{ $post->post_image }}" class="card-img-top" alt="{{ $post->title }}'s image">
                     <div class="card-body">
+
+                        <h6 class="card-subtitle text-success mb-3">
+                            {{-- ? Essendo presente più di un tag, vanno ciclati --}}
+                            <div>
+                                Tags: 
+                            </div>
+                            @forelse ($post->tags as $tag)
+
+                                {{ $tag->name }}
+
+                            @empty
+                                No tags
+                            @endforelse
+                        </h6>
+
                         <h5 class="card-subtitle">
                             Author id:
-                            Id:{{ $post->user_id }}
+                            {{ $post->user_id }}
                         </h5>
                         <h5 class="card-subtitle">
                             Author name:
