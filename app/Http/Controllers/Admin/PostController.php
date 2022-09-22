@@ -83,7 +83,13 @@ class PostController extends Controller
         $newData['slug'] = Str::slug($newData['title'] . '' . $lastPostId, '-');
         $newData['post_date'] = new DateTime();
 
-        $newPost->create($newData);
+        // ? Aggiungendo i tags, la create non aiuta, non ci permette di recuperare i tags, li metterebbe nella sua colonna
+        // $newPost->create($newData);
+
+        // ? Usiamo quindi fill e save, e con sync() (messo necessariamente dopo), aggiungiamo i tags!
+        $newPost->fill($newData);
+        $newPost->save();
+        $newPost->tags()->sync($newData['tags']);
 
         // ? mi faccio redirezionare nella show del nuovo post usando lo slug che arriva con upData!
         return redirect()->route('admin.posts.show', $newData['slug'])->with('session-change', $newData['title'] . ' ' . 'è stata aggiunta con successo!')
@@ -118,7 +124,8 @@ class PostController extends Controller
     {
         // ? Dall'index mi passo lo slug, qui in edit becco il post cercandolo nel DB e lo salvo in variabile
         $post = Post::where('slug', $slug)->first();
-        return view('admin.posts.edit', compact('post'));
+        $tags = Tag::all();
+        return view('admin.posts.edit', compact('post', 'tags'));
     }
 
     /**
@@ -155,7 +162,7 @@ class PostController extends Controller
 
         // ?aggiorno lo slug con il nuovo possibile titolo
         $upData['slug'] = Str::slug($upData['title']. ' ' . $upPost->id, '-');
-
+        
         $upPost->update($upData);
 
         return redirect()->route('admin.posts.show', $upData['slug'])->with('session-change', $upData['title'] . ' ' . 'è stata modificata con successo!')

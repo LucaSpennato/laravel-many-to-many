@@ -22,8 +22,8 @@
     <label class="form-check-label" for="tags">Tags</label>
     @foreach ($tags as $tag)
     <div class="form-check form-switch">
-        <input name="tags[]" class="form-check-input" value="{{ old('tag->id', $tag->id ) }}" type="checkbox" role="switch" id="tags">
-        <label class="form-check-label" for="tags">{{ old('tag->name', $tag->name ) }}</label>
+        <input name="tags[]" class="form-check-input" value="{{ $tag->id }}" type="checkbox" role="switch" id="tags">
+        <label class="form-check-label" for="tags">{{ $tag->name }}</label>
     </div>
     @endforeach
 </div>
