@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Admin\Post;
 use App\User;
 use App\Http\Controllers\Controller;
+use App\Models\Tag;
 use DateTime;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Http\Request;
@@ -42,7 +43,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $tags = Tag::all();
+
+        return view('admin.posts.create', compact('tags'));
     }
 
     /**
