@@ -162,8 +162,17 @@ class PostController extends Controller
 
         // ?aggiorno lo slug con il nuovo possibile titolo
         $upData['slug'] = Str::slug($upData['title']. ' ' . $upPost->id, '-');
+
         
         $upPost->update($upData);
+        // ? sync anche qua dei tags! 
+        // ! vedi anche in store!
+        if(isset($upData['tags'])){
+            $upPost->tags()->sync($upData['tags']);
+        }else{
+            $upData['tags'] = null;
+            $upPost->tags()->sync($upData['tags']);
+        }
 
         return redirect()->route('admin.posts.show', $upData['slug'])->with('session-change', $upData['title'] . ' ' . 'è stata modificata con successo!')
         ->with(['class' => 'alert-warning']);
