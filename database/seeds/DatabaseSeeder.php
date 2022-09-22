@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
             PostSeeder::class,
             // ? in quanto many to many, può andare ovunque
             TagTableSeeder::class,
+            // ? data la sua dipendenza sia da post che da tag, andrà necessariamente eseguita dopo queste due!
+            PostTagTableSeeder::class,
         ]);
     }
 }
