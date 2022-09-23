@@ -35,7 +35,7 @@
                         </h5>
                         <h5 class="card-subtitle">
                             Author name:
-                            Name: {{ $post->user->name }}
+                            <a href="{{ route('admin.users.show', $post->user->id) }}">{{ $post->user->name }}</a>  
                         </h5>
                         <h5 class="card-title">
                             Title:
