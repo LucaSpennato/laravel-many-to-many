@@ -44,7 +44,9 @@ class PostController extends Controller
     public function create()
     {
         $tags = Tag::all();
-
+        // ? se volessimo passare un'istanza vuota utilizzando 
+        // ? un solo form permettendoci di non avere errori di isset
+        // $post =  new Post;
         return view('admin.posts.create', compact('tags'));
     }
 

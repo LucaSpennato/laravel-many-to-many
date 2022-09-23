@@ -1,7 +1,7 @@
 <div class="mb-3">
     <label for="title" class="form-label">Title</label>
     <input name="title" type="text" class="form-control @error('title') is-invalid @enderror" id="title"
-    value="{{ old('title',$post->title ?? '') }}">
+    value="{{ old('title', $post->title ?? '') }}">
     <div class="form-text">Insert post's title</div>
     @error('title')
         <div class="alert alert-danger">{{ $message }}</div>
@@ -29,7 +29,7 @@
             <label class="form-check-label" for="tags">{{ $tag->name }}</label>    
         @else
             <input name="tags[]" class="form-check-input" value="{{ $tag->id }}" type="checkbox" role="switch" id="tags"
-            {{ $post->tags->contains($tag) ? 'checked' : '' }}>
+            @isset($post) {{ $post->tags->contains($tag) ? 'checked' : '' }}@endisset>
             <label class="form-check-label" for="tags">{{ $tag->name }}</label>
         @endif
 
