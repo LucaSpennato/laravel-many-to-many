@@ -54,7 +54,23 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newData = $request->all();
+        $validateData = $request->validate(
+            [
+                'name' => 'required|min:3|max:20|unique:tags',
+            ],
+            [
+                'name.exists' => 'This is arleady taken.',
+                'name.unique' => 'This tag already exists.',
+            ]
+        );
+        $newTag = new Tag();
+
+        $newTag->create($newData);
+
+        return redirect()->route('admin.tags.index')->with('status-change', $newData['name'] . ' ' . 'è stata aggiunta con successo!')
+        ->with(['class' => 'alert-success']);
+
     }
 
     /**

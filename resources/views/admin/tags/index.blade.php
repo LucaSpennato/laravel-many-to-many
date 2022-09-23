@@ -20,7 +20,11 @@
                         {{ session('status-change') }}
                     </div>
                 @endif
-
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <a href="{{ route('admin.tags.create') }}" class="btn btn-primary">New Tag</a>
+                    </li>
+                </ul>
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
