@@ -18,10 +18,10 @@ class CreatePostTagTable extends Migration
             // ? Non avendo un id prendiamo gli id delle rispettive tabelle
             $table->unsignedBigInteger('post_id');
             // ! on('') al plurale, si riferisce alla tabella!
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
 
             $table->unsignedBigInteger('tag_id');
-            $table->foreign('tag_id')->references('id')->on('tags');
+            $table->foreign('tag_id')->references('id')->on('tags')->onDelete('cascade');
 
             // ! è importante precisare che questi siano primary keys
             $table->primary(['post_id', 'tag_id']);

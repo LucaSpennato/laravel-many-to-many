@@ -14,9 +14,9 @@ class AddForeignKeyToPostsTable extends Migration
     public function up()
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->unsignedBigInteger('user_id')->after('id');
+            // $table->unsignedBigInteger('user_id')->after('id');
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
 
             // ? Può anche esser abbreviato, laravel usa il nome della tabella per fare le sue ricerche,
             // ?  usarlo fuori contesti inglesi è un problema
