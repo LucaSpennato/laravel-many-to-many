@@ -65,9 +65,11 @@ class PostController extends Controller
                 'title' => 'required|min:2|max:100',
                 'post_image' => 'required|active_url|max:21844',
                 'post_content' => 'required|min:10|max:21844',
+                'tags' => 'exists:tags,id'
             ],
             [
                 'post_image.active_url' => 'The image must be an active_url',
+                'tags.exists'=> 'https://www.meme-arsenal.com/memes/c080ba0912753ad52f61489d1c99013c.jpg'
             ],
         );
 
@@ -151,12 +153,14 @@ class PostController extends Controller
                     // Se il dato è unico, permette di inviare lo stesso, il problema nell'update avviene quando non viene modificato il titolo
                     // essendo già presente, senza questa regola non verrà aggiornato
                     // Rule::unique('posts')->ignore($upData['title'], 'title'),
-                    ],
-                    'post_image' => 'required|active_url|max:21844',
-                    'post_content' => 'required|min:10|max:21844',
+                ],
+                'post_image' => 'required|active_url|max:21844',
+                'post_content' => 'required|min:10|max:21844',
+                'tags' => 'exists:tags,id'
             ],
             [
                 'post_image.active_url' => 'The image must be an active_url',
+                'tags.exists'=> 'https://www.meme-arsenal.com/memes/c080ba0912753ad52f61489d1c99013c.jpg'
             ],
         );
         

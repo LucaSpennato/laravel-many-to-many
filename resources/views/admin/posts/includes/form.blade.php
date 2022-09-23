@@ -18,23 +18,32 @@
     @enderror
 </div>
 
-<div class="mb-3">
-    <label class="form-check-label" for="tags">Tags</label>
-    @foreach ($tags as $tag)
-    <div class="form-check form-switch">
-
-        @if ($errors->any())
-            <input name="tags[]" class="form-check-input" value="{{ $tag->id }}" type="checkbox" role="switch" id="tags"
-            {{ in_array($tag->id, old('tags', [])) ? 'checked' : ''}}>
-            <label class="form-check-label" for="tags">{{ $tag->name }}</label>    
-        @else
-            <input name="tags[]" class="form-check-input" value="{{ $tag->id }}" type="checkbox" role="switch" id="tags"
-            @isset($post) {{ $post->tags->contains($tag) ? 'checked' : '' }}@endisset>
-            <label class="form-check-label" for="tags">{{ $tag->name }}</label>
-        @endif
-
+<div class="mb-3 row">
+    <div class="col-6">
+        <label class="form-check-label" for="tags">Tags</label>
+        @foreach ($tags as $tag)
+        <div class="form-check form-switch">
+    
+            @if ($errors->any())
+                <input name="tags[]" class="form-check-input" 
+                value="{{ $tag->id }}" type="checkbox" role="switch" id="tags"
+                {{ in_array($tag->id, old('tags', [])) ? 'checked' : ''}}>
+                <label class="form-check-label" for="tags">{{ $tag->name }}</label>    
+            @else
+                <input name="tags[]" class="form-check-input" 
+                value="{{ $tag->id }}" type="checkbox" role="switch" id="tags"
+                @isset($post) {{ $post->tags->contains($tag) ? 'checked' : '' }} @endisset>
+                <label class="form-check-label" for="tags">{{ $tag->name }}</label>
+            @endif
+        </div>
+        @endforeach
     </div>
-    @endforeach
+    <div class="col-6">
+        @error('tags')
+            <h3>Stop right there heker</h3>
+            <img src="{{ $message }}" alt="heh" class="w-50">
+        @enderror
+    </div>
 </div>
 
 <div class="mb-3">
