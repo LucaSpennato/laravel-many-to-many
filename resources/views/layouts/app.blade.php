@@ -48,6 +48,10 @@
                                 <a class="nav-link {{ request()->routeIs('admin.users.index') ? 'active text-primary' : '' }}"  
                                 href="{{ route('admin.users.index') }}">All Users</a>
                             </li>
+                            <li>
+                                <a class="nav-link {{ request()->routeIs('admin.tags.index') ? 'active text-primary' : '' }}"  
+                                    href="{{ route('admin.tags.index') }}">Tags</a>
+                            </li>
                         @endguest
                     </ul>
 
