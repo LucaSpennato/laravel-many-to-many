@@ -100,6 +100,6 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
-        return redirect()->route('admin.tags.index')->with('session-change' . ' ' . 'è stato eliminato con successo.');
+        return redirect()->route('admin.tags.index')->with('status-change', $tag->name  . ' ' . 'è stata eliminata con successo')->with(['class' => 'alert-danger']);
     }
 }
