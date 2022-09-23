@@ -42,7 +42,8 @@ class TagController extends Controller
      */
     public function create()
     {
-        //
+        $tag = new Tag();
+        return view('admin.tags.create', compact('tag'));
     }
 
     /**
@@ -96,8 +97,9 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return redirect()->route('admin.tags.index')->with('session-change' . ' ' . 'è stato eliminato con successo.');
     }
 }
