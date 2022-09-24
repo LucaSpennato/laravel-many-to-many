@@ -21,7 +21,7 @@ class UsersTableSeeder extends Seeder
         // ! Hash::make(), ci permette di criptare le password
         $myUser->password = Hash::make('ciaociaociao');
         $myUser->save();
-        for ($i=0; $i < 10; $i++) { 
+        for ($i=0; $i < 50; $i++) { 
             $newUser = new User();
             $newUser->name = $faker->userName();
             $newUser->email = $faker->unique()->email();

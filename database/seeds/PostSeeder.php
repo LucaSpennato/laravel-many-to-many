@@ -19,7 +19,7 @@ class PostSeeder extends Seeder
         // ? Chiamo user, lo salvo in users
         $users = User::all();
 
-        for ($i=0; $i < 50; $i++) { 
+        for ($i=0; $i < 200; $i++) { 
             $newpost = new Post();
             $newpost->title = $faker->realText(35);
             // ? Prendiamo users e lo inseriamo nelo user is randomicamente con il faker random element

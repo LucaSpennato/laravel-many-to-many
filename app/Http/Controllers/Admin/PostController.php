@@ -7,10 +7,11 @@ use App\User;
 use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use DateTime;
-use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -23,16 +24,19 @@ class PostController extends Controller
     {
         // $posts = Post::all(); // ! in questo modo vedremmo tutti i post, ma vogliamo visualizzare solo i post del singolo user a cui appartengono
 
-        // $posts = Post::where('user_id', Auth::id())->get(); // ! Ci sono più modi per ottenere i post relativi ad un solo utente
+        // $posts = Post::where('user_id', Auth::id())->get();  // ! Ci sono più modi per ottenere i post relativi ad un solo utente
 
         // ! Sfruttiamo la relazione
         // $user = User::findOrFail(Auth::id());
         // $posts = $user->posts;
 
         // ! con questo metodo sfruttiamo il model 
-        $posts = Auth::user()->posts;
+        // ! prendiamo solo i post dell'utente che sta visualizzando!
+        // $posts = Auth::user()->posts;
         // dd(Auth::user()->id);
 
+        // ? To paginate!!
+        $posts = Post::paginate(20);
         return view('admin.posts.index', compact('posts'));
     }
 

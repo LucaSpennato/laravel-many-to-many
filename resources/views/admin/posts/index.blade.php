@@ -57,6 +57,9 @@
                 </table>
 
             </div>
+            <div class="col-10 m-auto d-flex justify-content-center mt-3">
+                {{ $posts->links() }}
+            </div>
         </div>
     </div>
 @endsection

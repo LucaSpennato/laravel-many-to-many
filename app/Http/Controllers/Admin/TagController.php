@@ -145,4 +145,5 @@ class TagController extends Controller
         // $tag::destroy('tag');
         return redirect()->route('admin.tags.index')->with('status-change', $tag->name  . ' ' . 'è stata eliminata con successo')->with(['class' => 'alert-danger']);
     }
+
 }
