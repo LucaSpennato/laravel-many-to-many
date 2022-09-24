@@ -20,7 +20,7 @@
                         </div>
 
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('admin.posts.edit', $tag->id) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('admin.tags.edit', $tag->id) }}" class="btn btn-primary">Edit</a>
 
                             <form action="{{ route('admin.posts.destroy', $tag->id) }}" method="post" class="delete-form"
                                 data-name="{{ $tag->name }}">

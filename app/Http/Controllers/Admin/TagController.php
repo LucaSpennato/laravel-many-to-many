@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class TagController extends Controller
 {
@@ -57,7 +58,7 @@ class TagController extends Controller
         $newData = $request->all();
         $validateData = $request->validate(
             [
-                'name' => 'required|min:3|max:20|unique:tags',
+                'name' => 'required|min:3|max:20|unique:tags,name',
             ],
             [
                 'name.exists' => 'This is arleady taken.',
@@ -92,9 +93,9 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tag $tag)
     {
-        //
+        return view('admin.tags.edit', compact('tag'));
     }
 
     /**
@@ -104,9 +105,31 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+        $upTag = Tag::findOrFail($id);
+        $validateData = $request->validate(
+            [
+                'name' => [
+                    'required',
+                    'min:3',
+                    'max:20',
+                    'unique:tags,name',
+                    Rule::unique('tags')->ignore($upTag->name, 'name'),
+                ],
+            ],
+            [
+                'name.exists' => 'This is arleady taken.',
+                'name.unique' => 'This tag already exists.',
+                ]
+            );
+            
+            
+        $upData = $request->all();
+        $upTag->update($upData);
+
+        return redirect()->route('admin.tags.index')->with('status-change', $upData['name'] . ' ' . 'è stata modificata con successo!')
+        ->with(['class' => 'alert-warning']);
     }
 
     /**
@@ -118,6 +141,8 @@ class TagController extends Controller
     public function destroy(Tag $tag)
     {
         $tag->delete();
+        // oppure: 
+        // $tag::destroy('tag');
         return redirect()->route('admin.tags.index')->with('status-change', $tag->name  . ' ' . 'è stata eliminata con successo')->with(['class' => 'alert-danger']);
     }
 }

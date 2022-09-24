@@ -49,6 +49,7 @@
                                 <td>{{ $tag->posts->count() }}</td>
                                 <td>
                                     <a href="{{ route('admin.tags.show', $tag->id) }}" class="btn btn-success">Tag info</a>
+                                    <a href="{{ route('admin.tags.edit', $tag->id) }}" class="btn btn-primary">Edit Tag</a>
 
                                     <form action="{{ route('admin.tags.destroy', $tag->id) }}" method="post" class="d-inline delete-form"
                                         data-name="{{ $tag->name }}">
