@@ -99,7 +99,10 @@ class PostController extends Controller
         // ? Aggiungendo i tags, la create non aiuta, non ci permette di recuperare i tags, li metterebbe nella sua colonna
         // $newPost->create($newData);
 
-        $img_path = Storage::put('uploads', $newData['post_image']);
+        // $img_path = Storage::put('uploads', $newData['post_image']);
+        $user = Auth::user()->name;
+        // dd($user);
+        $img_path = $newData['post_image']->storeAs('images', $user . 'image.jpg');
         $newData['post_image'] = $img_path;
 
         // ? Usiamo quindi fill e save, e con sync() (messo necessariamente dopo), aggiungiamo i tags!
