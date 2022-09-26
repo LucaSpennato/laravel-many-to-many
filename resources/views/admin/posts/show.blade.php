@@ -14,7 +14,7 @@
                 @endif
 
                 <div class="card m-auto mt-5 p-1" style="width: 18rem;">
-                    <img src="{{ asset('storate/', $post->post_image) }}" class="card-img-top" alt="{{ $post->title }}'s image">
+                    <img src="{{ asset('storage/', $post->post_image) }}" class="card-img-top" alt="{{ $post->title }}'s image">
                     <div class="card-body">
 
                         <h6 class="card-subtitle text-success mb-3">
