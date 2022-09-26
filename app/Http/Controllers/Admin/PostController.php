@@ -92,10 +92,15 @@ class PostController extends Controller
         $newData['slug'] = Str::slug($newData['title'] . '' . $lastPostId, '-');
         $newData['post_date'] = new DateTime();
 
+        // if(isset($newData['tags'])){
+        //     $newPost->optionals()->sync($newData['tags']);
+        // } 
+
         // ? Aggiungendo i tags, la create non aiuta, non ci permette di recuperare i tags, li metterebbe nella sua colonna
         // $newPost->create($newData);
 
-        $imgPath = Storage::put('uploads', $newData['post_image']);
+        $img_path = Storage::put('uploads', $newData['post_image']);
+        $newData['post_image'] = $img_path;
 
         // ? Usiamo quindi fill e save, e con sync() (messo necessariamente dopo), aggiungiamo i tags!
         $newPost->fill($newData);
@@ -120,7 +125,7 @@ class PostController extends Controller
         // ?<a href="{{ route('admin.posts.show', $post->id) }}">Nome</a>
         // ! chiedi come far andare la show con URI slug usando la dependency injection!!!
         $post = Post::where('slug', $slug)->first();
-
+        // dd($post);
         $idAuth = Auth::id();
         return view('admin.posts.show', compact('post', 'idAuth'));
     }
@@ -178,6 +183,12 @@ class PostController extends Controller
 
         
         $upPost->update($upData);
+        // ? completo
+        // if(isset($data['tags'])){
+        //     $post->tags()->sync($data['tags']);
+        // } else{
+        //     $post->tags()->detach();
+        // }
         // ? sync anche qua dei tags! 
         // ! vedi anche in store!
         if(!isset($upData['tags'])){
