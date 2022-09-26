@@ -10,7 +10,8 @@
 
 <div class="mb-3">
     <label for="post_image" class="form-label">Image</label>
-    <input name="post_image" type="text" class="form-control @error('post_image') is-invalid @enderror" id="post_image"
+    <input name="post_image" type="file" accept="image/jpg, image/png" 
+    class="form-control @error('post_image') is-invalid @enderror" id="post_image"
     value="{{ old('post_image',$post->post_image ?? '') }}">
     <div class="form-text">Insert post's image</div>
     @error('post_image')

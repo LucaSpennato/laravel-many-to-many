@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -67,12 +68,12 @@ class PostController extends Controller
         $validateData = $request->validate(
             [
                 'title' => 'required|min:2|max:100',
-                'post_image' => 'required|active_url|max:21844',
+                // 'post_image' => 'required|active_url|max:21844',
                 'post_content' => 'required|min:10|max:21844',
                 'tags' => 'exists:tags,id'
             ],
             [
-                'post_image.active_url' => 'The image must be an active_url',
+                // 'post_image.active_url' => 'The image must be an active_url',
                 'tags.exists'=> 'https://www.meme-arsenal.com/memes/c080ba0912753ad52f61489d1c99013c.jpg'
             ],
         );
@@ -93,6 +94,8 @@ class PostController extends Controller
 
         // ? Aggiungendo i tags, la create non aiuta, non ci permette di recuperare i tags, li metterebbe nella sua colonna
         // $newPost->create($newData);
+
+        $imgPath = Storage::put('uploads', $newData['image']);
 
         // ? Usiamo quindi fill e save, e con sync() (messo necessariamente dopo), aggiungiamo i tags!
         $newPost->fill($newData);
