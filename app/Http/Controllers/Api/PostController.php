@@ -54,25 +54,25 @@ class PostController extends Controller
     public function show($id)
     {
         // ! Per il singolo post nella show, usiamo find per trovarlo
-        $post = Post::find($id);
-        // ! Se è stato trovato, manda il dato, altrimenti 404. E' findOrFail ma manuale per poter dare la 404.
-        // ! Con find or fail funzionerebbe allo stesso modo, ma restituisce l'intera pagina di 404, rallentando il tutto
-        if($post){
-            return response()->json([
-                "success" => true,
-                "data" => $post,
-            ]);
-        }else{
-            return response('', 404);
-        }
+        // $post = Post::find($id);
+        // // ! Se è stato trovato, manda il dato, altrimenti 404. E' findOrFail ma manuale per poter dare la 404.
+        // // ! Con find or fail funzionerebbe allo stesso modo, ma restituisce l'intera pagina di 404, rallentando il tutto
+        // if($post){
+        //     return response()->json([
+        //         "success" => true,
+        //         "data" => $post,
+        //     ]);
+        // }else{
+        //     return response('', 404);
+        // }
 
         // ! Esempio con find or fail dove restituisce l'intero blade
-        // $post = Post::findOrFail($id);
+        $post = Post::findOrFail($id);
 
-        // return response()->json([
-        //     "success" => true,
-        //     "data" => $post,
-        // ]);
+        return response()->json([
+            "success" => true,
+            "data" => $post,
+        ]);
     }
 
     /**
