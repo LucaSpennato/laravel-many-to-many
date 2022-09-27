@@ -14,7 +14,13 @@
                 @endif
 
                 <div class="card m-auto mt-5 p-1" style="width: 18rem;">
-                    <img src="{{ asset('storage/' . $post->post_image) }}" class="card-img-top" alt="{{ $post->title }}'s image">
+                    {{-- Controlla che sia un url e non un'immagine salvata in db --}}
+                    @if (filter_var($post->post_image, FILTER_VALIDATE_URL))
+                        <img src="{{ $post->post_image }}" alt="{{ $post->title }}'s image">
+                    @else
+                        <img src="{{ asset('storage/' . $post->post_image) }}" class="card-img-top" alt="{{ $post->title }}'s image">
+                    @endif
+
                     <div class="card-body">
 
                         <h6 class="card-subtitle text-success mb-3">
